@@ -6,6 +6,11 @@
     --scrollbar-thumb-hover-color: var(--cui-gray-400, #999);
     --scrollbar-hover-size: calc(var(--scrollbar-size) * 1.5);
   }
+
+  .title-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
 
 // ng-scrollbar css variables
