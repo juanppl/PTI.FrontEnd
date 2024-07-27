@@ -1,6 +1,7 @@
 ## Overview
 
-https://raw.githubusercontent.com/juanppl/PTI.FrontEnd/src/assets/overview.png
+<span>![</span><span>Overview of the platform</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/juanppl/PTI.FrontEnd/src/assets/overview.png</span><span>)</span>
+
 
 #### <i>Prerequisites</i>
 
