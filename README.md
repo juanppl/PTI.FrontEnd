@@ -1,6 +1,6 @@
 ## Overview
 
-https://github.com/juanppl/PTI.FrontEnd/src/assets/overview.png
+https://raw.githubusercontent.com/juanppl/PTI.FrontEnd/src/assets/overview.png
 
 #### <i>Prerequisites</i>
 
