@@ -1,0 +1,78 @@
+[
+    {
+      "id": 1,
+      "fullName": "Laptop",
+      "displayName": "ASUS ROG NVIDIA",
+      "description": "Gaming laptop with high performance",
+      "price": 2000,
+      "isActive": true,
+      "creationDate": "2024-07-16T18:33:01.183Z",
+      "expireDate": "2024-07-16T18:33:01.183Z",
+      "categoryId": 2,
+      "availableQty": 5,
+      "lastModificationDate": "2024-07-16T18:33:01.183Z",
+      "isDeleted": false,
+      "deletedDate": null,
+      "category": {
+        "categoryId": 2,
+        "name": "Electrónica"
+      }
+    },
+    {
+      "id": 2,
+      "fullName": "Card",
+      "displayName": "RTX Gaming",
+      "description": "Gaming device with high performance",
+      "price": 900,
+      "isActive": true,
+      "creationDate": "2024-07-16T18:33:01.183Z",
+      "expireDate": "2024-07-16T18:33:01.183Z",
+      "categoryId": 2,
+      "availableQty": 3,
+      "lastModificationDate": "2024-07-16T18:33:01.183Z",
+      "isDeleted": false,
+      "deletedDate": "2024-07-16T22:01:00.163Z",
+      "category": {
+        "categoryId": 2,
+        "name": "Electrónica"
+      }
+    },
+    {
+      "id": 3,
+      "fullName": "Laptop",
+      "displayName": "ASUS ROG NVIDIA",
+      "description": "Gaming laptop with high performance",
+      "price": 200,
+      "isActive": true,
+      "creationDate": "2024-07-16T18:33:01.183Z",
+      "expireDate": "2024-07-16T18:33:01.183Z",
+      "categoryId": 2,
+      "availableQty": 1,
+      "lastModificationDate": "2024-07-16T18:33:01.183Z",
+      "isDeleted": false,
+      "deletedDate": "2024-07-17T11:22:05.63Z",
+      "category": {
+        "categoryId": 2,
+        "name": "Electrónica"
+      }
+    },
+    {
+      "id": 4,
+      "fullName": "Cell Phone",
+      "displayName": "Moto G5 Plus",
+      "description": "Fastest network and Pro cam",
+      "price": 500,
+      "isActive": true,
+      "creationDate": "2024-07-17T19:37:26.66Z",
+      "expireDate": "2024-07-26T00:00:00Z",
+      "categoryId": 2,
+      "availableQty": 2,
+      "lastModificationDate": "2024-07-17T15:01:56.173Z",
+      "isDeleted": false,
+      "deletedDate": null,
+      "category": {
+        "categoryId": 2,
+        "name": "Electrónica"
+      }
+    }
+  ]

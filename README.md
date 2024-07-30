@@ -1,7 +1,16 @@
 ## Overview
 
+#### Initial Dashboard
+
 ![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/overview.png)
 
+#### Inventory Table
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/inventory-table.png)
+
+#### Create or edit product
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/form-products.png)
+
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/form-products-resp.png)
 
 #### <i>Prerequisites</i>
 

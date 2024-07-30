@@ -12,23 +12,25 @@ import {
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes,
-      withRouterConfig({
-        onSameUrlNavigation: 'reload'
-      }),
+      // withRouterConfig({
+      //   onSameUrlNavigation: 'reload'
+      // }),
       withInMemoryScrolling({
         scrollPositionRestoration: 'top',
         anchorScrolling: 'enabled'
       }),
       withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
-      withHashLocation()
+      // withHashLocation()
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
-    provideAnimations()
+    provideAnimations(),
+    provideHttpClient()
   ]
 };

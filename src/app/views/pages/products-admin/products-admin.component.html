@@ -1,0 +1,27 @@
+<div class="container">
+
+    @if (isLoading) {
+        <div class="d-flex justify-content-center py-5">
+            <app-spinner></app-spinner>
+        </div>
+    }
+
+    @if (!isLoading) {
+
+        @if (isTableShown) {
+            <div class="mt-4 d-flex justify-content-end align-items-center">
+                <button type="button" class="btn btn-primary" (click)="addNewProduct()">
+                    AGREGAR PRODUCTO
+                </button>
+            </div>
+            <app-product-admin-table [products]="products"></app-product-admin-table>
+        }
+    
+        @if (!isTableShown) {
+            <app-products-form></app-products-form>
+        }
+    }
+
+
+
+</div>

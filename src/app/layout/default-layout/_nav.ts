@@ -27,7 +27,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Inventario',
-    url: '/theme/colors',
+    url: '/products-admin',
     iconComponent: { name: 'cil-clipboard' }
   },
   {
