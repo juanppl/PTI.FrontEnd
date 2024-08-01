@@ -5,7 +5,7 @@ import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, Tex
 import { AuthService } from '../../../services/auth.service';
 import { UserCredentials } from 'src/app/models/Auth';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,8 @@ import { Router } from '@angular/router';
     FormControlDirective, 
     ButtonDirective, 
     NgStyle,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class LoginComponent {
