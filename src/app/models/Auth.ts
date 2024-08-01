@@ -8,3 +8,9 @@ export interface LoggedInUser {
     token: string,
     username: string
 }
+
+export interface CreateUser {
+    username: string,
+    email: string,
+    password: string
+}

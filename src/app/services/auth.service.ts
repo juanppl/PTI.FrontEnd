@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { LoggedInUser } from '../models/Auth';
+import { CreateUser, LoggedInUser } from '../models/Auth';
 import { UserProfile } from '../models/User';
 import Swal from 'sweetalert2';
 import { environment } from '../../environments/environment';
@@ -33,6 +33,19 @@ export class AuthService {
           html: `${err.error.Message} ${err.error.Id}`
         });
         return of(null);
+      })
+    );
+  }
+
+  public createUser(user: CreateUser): Observable<void> {
+    return this.http.post<void>(`${environment.api}register/`, user).pipe(
+      catchError((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error when creating user',
+          html: `${err.error.Message} ${err.error.Id}`
+        });
+        return of();
       })
     );
   }

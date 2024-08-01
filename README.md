@@ -1,7 +1,12 @@
 ## Overview
 
-#### Initial Dashboard
+#### Login Screen (/login)
+![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/login.png)
 
+#### Register Screen (/register)
+![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/register.png)
+
+#### Initial Dashboard
 ![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/overview.png)
 
 #### Inventory Table
