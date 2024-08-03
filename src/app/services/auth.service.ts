@@ -23,6 +23,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('userData')!);
   }
 
+  public logout(): void {
+    localStorage.removeItem('userData');
+  }
+
   public logIn(username: string, password: string): Observable<LoggedInUser | null> {
     const url = `${environment.api}user-login/`;
     return this.http.post<LoggedInUser>(url, { username, password }).pipe(
