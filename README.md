@@ -3,8 +3,14 @@
 #### Login Screen (/login)
 ![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/login.png)
 
+#### Login Screen Validations
+![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/login-validation.png)
+
 #### Register Screen (/register)
 ![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/register.png)
+
+#### Register Screen Validations
+![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/register-validation.png)
 
 #### Initial Dashboard
 ![Overview of the platform](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/overview.png)
@@ -16,6 +22,9 @@
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/form-products.png)
 
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/form-products-resp.png)
+
+#### Create or edit product validations
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/form-products-validations.png)
 
 #### <i>Prerequisites</i>
 

@@ -5,14 +5,18 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-              <form cForm (ngSubmit)="logInUser()">
+              <form cForm #form="ngForm" (ngSubmit)="logInUser()">
                 <h1>Login</h1>
                 <p class="text-body-secondary">Inicia sesion con tu cuenta</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" name="username" cFormControl placeholder="Nombre de usuario" [(ngModel)]="user.username" />
+                  <input autoComplete="username" name="username" #username="ngModel" required cFormControl placeholder="Nombre de usuario" [(ngModel)]="user.username" />
+                  <p class="invalid-feedback d-block p-0 m-0"
+                    [ngClass]="{'d-block': username.invalid && (username.dirty || username.touched)}">
+                    Este campo es requerido
+                  </p>
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
@@ -25,11 +29,16 @@
                     cFormControl
                     placeholder="Constraseña"
                     type="password"
+                    #password="ngModel" required
                   />
+                  <p class="invalid-feedback d-block p-0 m-0"
+                    [ngClass]="{'d-block': password.invalid && (password.dirty || password.touched)}">
+                    Este campo es requerido
+                  </p>
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button type="submit" cButton class="px-4" color="primary">
+                    <button type="submit" cButton class="px-4" color="primary" [disabled]="!form.valid">
                       Login
                     </button>
                   </c-col>

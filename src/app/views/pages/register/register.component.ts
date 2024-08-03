@@ -5,6 +5,8 @@ import { CreateUser } from 'src/app/models/Auth';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { PasswordsConfirmationValidatorDirective } from '../../../directives/passwords-confirmation-validator.directive';
 
 @Component({
   selector: 'app-register',
@@ -25,14 +27,16 @@ import { FormsModule } from '@angular/forms';
     FormControlDirective,
     ButtonDirective,
     FormsModule,
-    RouterModule
+    RouterModule,
+    CommonModule,
+    PasswordsConfirmationValidatorDirective
   ]
 })
 export class RegisterComponent {
 
   public user: CreateUser;
-  public password = '';
-  public passwordVerification = '';
+  public password;
+  public passwordVerification;
 
   constructor(private authService: AuthService, private router: Router) {
     this.user = {
@@ -40,6 +44,8 @@ export class RegisterComponent {
       email: '',
       password: ''
     };
+    this.password = '';
+    this.passwordVerification = '';
   }
 
   public createUser(): void {

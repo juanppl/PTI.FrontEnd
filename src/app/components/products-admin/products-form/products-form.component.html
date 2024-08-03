@@ -17,28 +17,44 @@
                         <div class="text-left p-0 col-4 title2 my-auto">Nombre completo*</div>
                         <div class="p-0 col-8">
                             <input class="w-100 form-control mr-2" type="text" [(ngModel)]="product!.fullName" required
-                                name="fullName" maxLength="50" autocomplete="off" max="50" />
+                                #fullName="ngModel" name="fullName" maxLength="50" autocomplete="off" max="50" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': fullName.invalid && (fullName.dirty || fullName.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row">
                         <div class="text-left p-0 col-4 title2 my-auto">Nombre de visualizacion*</div>
                         <div class="p-0 col-8">
                             <input class="w-100 form-control mr-2" type="text" [(ngModel)]="product!.displayName" 
-                                required name="displayName" maxLength="50" autocomplete="off" max="50" />
+                                #fdisplayName="ngModel" required name="displayName" maxLength="50" autocomplete="off" max="50" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': fdisplayName.invalid && (fdisplayName.dirty || fdisplayName.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row">
                         <div class="text-left p-0 col-4 title2 my-auto">Descripcion*</div>
                         <div class="p-0 col-8">
                             <textarea class="w-100 form-control mr-2" type="textarea" [(ngModel)]="product!.description" required
-                                name="description" maxLength="250" autocomplete="off" max="250" ></textarea>
+                                #description="ngModel" name="description" maxLength="250" autocomplete="off" max="250" ></textarea>
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': description.invalid && (description.dirty || description.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row">
                         <div class="text-left p-0 col-4 title2 my-auto">Precio*</div>
                         <div class="p-0 col-8">
                             <input class="w-100 form-control mr-2" type="number" [(ngModel)]="product!.price"
-                                required name="price" autocomplete="off" max="10000" />
+                                #price="ngModel" required name="price" autocomplete="off" max="10000" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': price.invalid && (price.dirty || price.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row">
@@ -48,14 +64,14 @@
                                 <input class="form-check-input" type="radio" [(ngModel)]="product!.isActive"
                                     name="flexRadioDefault" id="flexRadioDefault1" [value]="true" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                  Active
+                                  Activo
                                 </label>
                               </div>
                               <div class="form-check">
                                 <input class="form-check-input" type="radio" [(ngModel)]="product!.isActive"
                                     name="flexRadioDefault" id="flexRadioDefault2" [value]="false">
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                  Inactive
+                                  Inactivo
                                 </label>
                               </div>
                         </div>
@@ -64,25 +80,37 @@
                         <div class="text-left p-0 col-4 title2 my-auto">Fecha de expiracion*</div>
                         <div class="p-0 col-8">
                             <input class="w-100 form-control mr-2" type="date" [value]="product.expireDateAsString" (change)="assignExpireDate($event)" 
-                                name="expireDate" required />
+                                ngModel #expireDate="ngModel" name="expireDate" required />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': expireDate.invalid && (expireDate.dirty || expireDate.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row">
                         <div class="text-left p-0 col-4 title2 my-auto">Categoria*</div>
                         <div class="p-0 col-8">
-                            <select class="form-select rounded py-1 w-100" name="category" placeholder="select" required
+                            <select class="form-select rounded py-1 w-100" #category="ngModel" name="category" placeholder="select" required
                                 [(ngModel)]="product!.categoryId" name="cateogrySelected">
                                 @for (category of categories; track $index) {
                                     <option [ngValue]="category.categoryId" >{{category.name}}</option>
                                 }
                             </select>
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': category.invalid && (category.dirty || category.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row">
                         <div class="text-left p-0 col-4 title2 my-auto">Cantidad disponible*</div>
                         <div class="p-0 col-8">
                             <input class="w-100 form-control mr-2" type="number" [(ngModel)]="product!.availableQty" 
-                                required name="availableQty" max="100" min="1" required/>
+                                #availableQty="ngModel" required name="availableQty" max="100" min="1" required/>
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': availableQty.invalid && (availableQty.dirty || availableQty.touched)}">
+                                Este campo es requerido
+                            </p>
                         </div>
                     </div>
                     <div class="mb-3 p-0 row py-3">

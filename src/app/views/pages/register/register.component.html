@@ -4,34 +4,61 @@
       <c-col lg="7" md="9" xl="6">
         <c-card class="mx-4">
           <c-card-body class="p-4">
-            <form cForm (ngSubmit)="createUser()">
+            <form cForm #form="ngForm" (ngSubmit)="createUser()">
               <h1>Registrarse</h1>
               <p class="text-body-secondary">Crear cuenta</p>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" name="username" cFormControl placeholder="Nombre de usuario" [(ngModel)]="user.username" />
+                <input autoComplete="name" name="username" #username="ngModel" required cFormControl placeholder="Nombre de usuario" [(ngModel)]="user.username" />
+                <p class="invalid-feedback d-block p-0 m-0"
+                  [ngClass]="{'d-block': username.invalid && (username.dirty || username.touched)}">
+                  Este campo es requerido
+                </p>
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>&#64;</span>
-                <input autoComplete="email" name="email" cFormControl placeholder="Email" [(ngModel)]="user.email" />
+                <input autoComplete="email" name="email" #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  cFormControl placeholder="Email" [(ngModel)]="user.email" />
+                <p class="invalid-feedback d-block p-0 m-0"
+                  [ngClass]="{'d-block': user.email.length == 0 && email.invalid && (email.dirty || email.touched)}">
+                  Este campo es requerido
+                </p>
+                <p class="invalid-feedback d-block p-0 m-0"
+                  [ngClass]="{'d-block': user.email.length > 0 && email.invalid && email.errors && email.errors['pattern'] && (email.dirty || email.touched)}">
+                  Digita un email valido (ej. nombre&#64;dominio.com)
+                </p>
               </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" name="password" cFormControl placeholder="Contraseña" type="password" [(ngModel)]="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" name="verificationPassword" cFormControl placeholder="Repetir Constraseña" type="password" 
-                  [(ngModel)]="passwordVerification" (change)="verifyAndSetPassword()" />
-              </c-input-group>
+              <div ngModelGroup="passwords" #passwords="ngModelGroup" appPasswordsConfirmationValidator>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input name="pass" #pass="ngModel" required cFormControl placeholder="Contraseña" type="password" [(ngModel)]="password" />
+                  <p class="invalid-feedback d-block p-0 m-0"
+                    [ngClass]="{'d-block': pass.invalid && (pass.dirty || pass.touched)}">
+                    Este campo es requerido
+                  </p>
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input name="verificationPassword" #verifyPassword="ngModel" required cFormControl placeholder="Repetir Constraseña" type="password" 
+                    [(ngModel)]="passwordVerification" (change)="verifyAndSetPassword()" />
+                    <p class="invalid-feedback d-block p-0 m-0"
+                      [ngClass]="{'d-block': verifyPassword.invalid && (verifyPassword.dirty || verifyPassword.touched)}">
+                      Este campo es requerido
+                    </p>
+                    <p class="invalid-feedback d-block p-0 m-0"
+                      [ngClass]="{'d-block': passwords.errors && passwords.errors['passwordCheck'] && (verifyPassword.dirty || verifyPassword.touched)}">
+                      Las contraseñas no son iguales
+                    </p>
+                </c-input-group>
+              </div>
               <div class="d-grid">
-                <button cButton type="submit" color="success" class="btn-color" >Crear cuenta</button>
+                <button cButton type="submit" color="success" class="btn-color" [disabled]="!form.valid" >Crear cuenta</button>
               </div>
             </form>
           </c-card-body>
