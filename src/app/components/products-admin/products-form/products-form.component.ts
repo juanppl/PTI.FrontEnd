@@ -97,18 +97,18 @@ export class ProductsFormComponent {
 
   private editProduct(product: Product): void {
     this.productService.editProduct(product)
-    .subscribe({
-      next: () => {
-        this.isSaving = false;
-        this.productService.displayTable$.next(true);
-        this.productService.refreshTable$.next();
-        Swal.fire({
-          title: "Editado Exitoso!",
-          text: "Se ha editado el producto exitosamente!",
-          icon: "success"
-        });
-      }
-    });
+      .subscribe({
+        next: () => {
+          this.isSaving = false;
+          this.productService.displayTable$.next(true);
+          this.productService.refreshTable$.next();
+          Swal.fire({
+            title: "Editado Exitoso!",
+            text: "Se ha editado el producto exitosamente!",
+            icon: "success"
+          });
+        }
+      });
   }
 
   public cancel(): void {

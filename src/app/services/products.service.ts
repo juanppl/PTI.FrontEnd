@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, ReplaySubject, Subject } from 'rxjs';
+import { catchError, map, Observable, ReplaySubject, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/Product';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,19 @@ export class ProductsService {
   public selectedProduct$: ReplaySubject<Product | null> = new ReplaySubject<Product | null>(); 
   public displayTable$: Subject<boolean> = new Subject<boolean>();
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   public getListOfProducts(): Observable<Product[]> {
     const url = `${environment.api}products/get-all-products`;
     return this.http.get<Product[]>(url)
     .pipe(
+      map((products: Product[]) => {
+        products.forEach((product: Product) => {
+          product.expireDateAsString = this.datePipe.transform(product.expireDate, 'YYYY-MM-dd');
+          product.categoryId = product.category.categoryId;
+        });
+        return products;
+      }),
       catchError(err => {
         Swal.fire({
           icon: 'error',

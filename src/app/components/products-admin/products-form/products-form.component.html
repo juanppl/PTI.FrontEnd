@@ -79,7 +79,7 @@
                     <div class="mb-3 p-0 row">
                         <div class="text-left p-0 col-4 title2 my-auto">Fecha de expiracion*</div>
                         <div class="p-0 col-8">
-                            <input class="w-100 form-control mr-2" type="date" [value]="product.expireDateAsString" (change)="assignExpireDate($event)" 
+                            <input class="w-100 form-control mr-2" type="date" [(ngModel)]="product.expireDateAsString" (change)="assignExpireDate($event)" 
                                 ngModel #expireDate="ngModel" name="expireDate" required />
                             <p class="invalid-feedback d-block p-0 m-0"
                                 [ngClass]="{'d-block': expireDate.invalid && (expireDate.dirty || expireDate.touched)}">
