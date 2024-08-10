@@ -15,5 +15,5 @@ export interface Product {
     lastModificationDate: Date | null;
     isDeleted: boolean | null;
     deletedDate: Date | null;
-    category: Category | null;
+    category: Category | any | null;
 }

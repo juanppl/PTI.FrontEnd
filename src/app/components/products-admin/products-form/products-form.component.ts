@@ -6,6 +6,7 @@ import { ProductsService } from '../../../services/products.service';
 import { CategoriesService } from '../../../services/categories.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products-form',
@@ -61,12 +62,12 @@ export class ProductsFormComponent {
   }
 
   private getListOfCategories(): void {
-    // this.categoryService.getListOfCategories()
-    //   .subscribe({
-    //     next: (categories: Category[]) => {
-    //       this.categories = categories;
-    //     }
-    //   });
+    this.categoryService.getListOfCategories()
+      .subscribe({
+        next: (categories: Category[]) => {
+          this.categories = categories;
+        }
+      });
   }
 
   public save(): void {
@@ -79,25 +80,35 @@ export class ProductsFormComponent {
   }
 
   private addNewProduct(product: Product): void {
-    // this.productService.addProduct(product)
-    //   .subscribe({
-    //     next: () => {
-    //       this.isSaving = false;
-    //       this.productService.displayTable$.next(true);
-    //       this.productService.refreshTable$.next();
-    //     }
-    //   });
+    this.productService.createProduct(product)
+      .subscribe({
+        next: () => {
+          this.isSaving = false;
+          this.productService.displayTable$.next(true);
+          this.productService.refreshTable$.next();
+          Swal.fire({
+            title: "Creado Exitoso!",
+            text: "Se ha creado el producto exitosamente!",
+            icon: "success"
+          });
+        }
+      });
   }
 
   private editProduct(product: Product): void {
-    // this.productService.editProduct(product)
-    // .subscribe({
-    //   next: () => {
-    //     this.isSaving = false;
-    //     this.productService.displayTable$.next(true);
-    //     this.productService.refreshTable$.next();
-    //   }
-    // });
+    this.productService.editProduct(product)
+    .subscribe({
+      next: () => {
+        this.isSaving = false;
+        this.productService.displayTable$.next(true);
+        this.productService.refreshTable$.next();
+        Swal.fire({
+          title: "Editado Exitoso!",
+          text: "Se ha editado el producto exitosamente!",
+          icon: "success"
+        });
+      }
+    });
   }
 
   public cancel(): void {

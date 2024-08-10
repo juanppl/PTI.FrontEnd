@@ -28,12 +28,14 @@ import { IconDirective } from '@coreui/icons-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { delay, filter, map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { ShoppingCartComponent } from '../../../components/shopping-cart/shopping-cart.component';
+import { ShoppingService } from 'src/app/services/shopping.service';
 
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
   standalone: true,
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, ThemeDirective, DropdownComponent, DropdownToggleDirective, TextColorDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressBarDirective, ProgressComponent, NgStyle]
+  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, ThemeDirective, DropdownComponent, DropdownToggleDirective, TextColorDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective, ProgressBarDirective, ProgressComponent, NgStyle, ShoppingCartComponent]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
 
@@ -43,6 +45,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
 
   readonly #authService = inject(AuthService);
+  readonly shoppingService = inject(ShoppingService);
 
   readonly colorModes = [
     { name: 'light', text: 'Light', icon: 'cilSun' },
@@ -77,6 +80,10 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   public logout(): void {
     this.#authService.logout();
+  }
+
+  public refreshProducts(): void {
+    this.shoppingService.refreshProductsFromCart$.next();
   }
 
 }
