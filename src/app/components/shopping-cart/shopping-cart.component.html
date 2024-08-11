@@ -1,1 +1,31 @@
-<p>shopping-cart works!</p>
+@if (cartProducts.length == 0) {
+    <div class="row p-0 m-0 w-100">
+        <div class="col-12 p-0 m-0 w-100 d-flex justify-content-center">
+            <p class="m-0 p-0 py-3">Agrega elementos al carrito!</p>
+        </div>
+    </div>
+}
+
+
+@for (product of cartProducts; track $index) {
+    <div class="row p-0 m-0">
+        <div class="col-10 p-0 m-0 py-2">
+            <p class="m-0 p-0 px-2 name-text"><b>Nombre:</b> {{product.fullName}}</p>
+            <p class="m-0 p-0 px-2"><b>Precio:</b> {{product.price | currency}}</p>
+        </div>
+        <div class="col-2 p-0 m-0 d-flex justify-content-center align-items-center">
+            <i class="fa-solid fa-trash white cursor-pointer" (click)="removeProductFromCart(product)" ></i>
+        </div>
+    </div>
+    @if (cartProducts.length > 1 && cartProducts.length -1 != $index) {
+        <hr class="solid p-0 m-0 my-1">
+    }
+}
+
+@if (cartProducts.length > 0) {
+    <div class="d-flex justify-content-center align-items-center" >
+        <button class="btn btn-primary mx-1 my-3 pay-btn">
+            Pagar
+        </button>
+    </div>
+}

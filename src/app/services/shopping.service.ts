@@ -26,4 +26,8 @@ export class ShoppingService {
     this.productsFromCart.splice(foundProductIdx, 1);
   }
 
+  public doesProductExistsOnCart(productId: number): boolean {
+    return this.productsFromCart.some(p => p.id == productId);
+  }
+
 }

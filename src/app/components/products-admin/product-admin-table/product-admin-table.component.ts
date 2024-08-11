@@ -2,6 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/Product';
 import { ProductsService } from 'src/app/services/products.service';
+import { ShoppingService } from 'src/app/services/shopping.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +15,10 @@ import Swal from 'sweetalert2';
 export class ProductAdminTableComponent {
   @Input({required: true}) products: Product[] = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private shoppingService: ShoppingService
+  ) {}
 
   public editProduct(product: Product) {
     this.productsService.displayTable$.next(false);
@@ -47,6 +51,19 @@ export class ProductAdminTableComponent {
       }
     });
 
+  }
+
+  public addProductToCart(product: Product) {
+    this.shoppingService.addProductToCart(product);
+    Swal.fire({
+      icon: 'success',
+      title: 'Producto Agregado',
+      text: 'Se ha agregado el producto al carrito de compra!'
+    });
+  }
+
+  public productExistsOnCart(product: Product): boolean {
+    return this.shoppingService.doesProductExistsOnCart(product.id!);
   }
 
 }
