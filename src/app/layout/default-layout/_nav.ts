@@ -22,7 +22,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Cuenta',
-    url: '/theme/colors',
+    url: '/profile',
     iconComponent: { name: 'cil-people' }
   },
   {
@@ -30,11 +30,11 @@ export const navItems: INavData[] = [
     url: '/products-admin',
     iconComponent: { name: 'cil-clipboard' }
   },
-  {
-    name: 'Reportes',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-chart-line' }
-  },
+  // {
+  //   name: 'Reportes',
+  //   url: '/theme/colors',
+  //   iconComponent: { name: 'cil-chart-line' }
+  // },
   // {
   //   title: true,
   //   name: 'Theme'

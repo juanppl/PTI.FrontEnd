@@ -25,8 +25,6 @@ import { IconDirective } from '@coreui/icons-angular';
 import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
-import { AuthService } from 'src/app/services/auth.service';
-import { UserProfile } from 'src/app/models/User';
 
 interface IUser {
   name: string;
@@ -148,22 +146,14 @@ export class DashboardComponent implements OnInit {
     trafficRadio: new FormControl('Month')
   });
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.initCharts();
     this.updateChartOnColorModeChange();
-    this.getAuthUser();
   }
 
-  public getAuthUser(): void {
-    const user = this.authService.getLoggedUser();
-    this.authService.getUserProfile(user.id.toString()).subscribe({
-      next: (userProfile: UserProfile | null) => {
-        console.log(userProfile);
-      }
-    });
-  }
+  
 
   initCharts(): void {
     this.mainChart = this.#chartsData.mainChart;

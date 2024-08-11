@@ -1,0 +1,73 @@
+
+<div class="d-flex justify-content-center">
+    <div class="form-container w-100">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-center py-3">Editar Perfil</h4>
+            </div>
+        </div>
+    
+    @if (user) {
+        <div class=" w-100">
+            <form #f="ngForm" class="form PrintArea py-4" (ngSubmit)="save()">
+            
+                <div class="mb-3 p-0 row">
+                    <div class="text-left p-0 col-4 title2 my-auto">Nombre de usuario</div>
+                    <div class="p-0 col-8">
+                        <input class="w-100 form-control mr-2" type="text" [(ngModel)]="user.username"
+                            name="username" disabled />
+                    </div>
+                </div>
+                <div class="mb-3 p-0 row">
+                    <div class="text-left p-0 col-4 title2 my-auto">Email</div>
+                    <div class="p-0 col-8">
+                        <input class="w-100 form-control mr-2" type="text" [(ngModel)]="user.email"
+                            name="email" disabled />
+                    </div>
+                </div>
+                <div class="mb-3 p-0 row">
+                    <div class="text-left p-0 col-4 title2 my-auto">Nombre*</div>
+                    <div class="p-0 col-8">
+                        <input class="w-100 form-control mr-2" type="text" [(ngModel)]="user.first_name" required
+                            #fullName="ngModel" name="fullName" maxLength="50" autocomplete="off" max="50" />
+                        <p class="invalid-feedback d-block p-0 m-0"
+                            [ngClass]="{'d-block': fullName.invalid && (fullName.dirty || fullName.touched)}">
+                            Este campo es requerido
+                        </p>
+                    </div>
+                </div>
+                <div class="mb-3 p-0 row">
+                    <div class="text-left p-0 col-4 title2 my-auto">Apellido*</div>
+                    <div class="p-0 col-8">
+                        <input class="w-100 form-control mr-2" type="text" [(ngModel)]="user.last_name" required
+                            #lastName="ngModel" name="lastName" maxLength="50" autocomplete="off" max="50" />
+                        <p class="invalid-feedback d-block p-0 m-0"
+                            [ngClass]="{'d-block': lastName.invalid && (lastName.dirty || lastName.touched)}">
+                            Este campo es requerido
+                        </p>
+                    </div>
+                </div>
+                <div class="mb-3 p-0 row">
+                    <div class="text-left p-0 col-4 title2 my-auto">Biografia*</div>
+                    <div class="p-0 col-8">
+                        <textarea class="w-100 form-control mr-2" type="text" [(ngModel)]="user.bio" required
+                            #bio="ngModel" name="bio" maxLength="250" autocomplete="off" max="50" ></textarea>
+                        <p class="invalid-feedback d-block p-0 m-0"
+                            [ngClass]="{'d-block': bio.invalid && (bio.dirty || bio.touched)}">
+                            Este campo es requerido
+                        </p>
+                    </div>
+                </div>
+                <div class="mb-3 p-0 row py-3">
+                    <div class="col-12 d-flex">
+                        <button class="btn btn-primary m-auto form-btn" [disabled]="!f.valid" type="submit">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    }
+    </div>
+</div>

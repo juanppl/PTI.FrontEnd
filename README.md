@@ -26,6 +26,9 @@
 #### Create or edit product validations
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/form-products-validations.png)
 
+#### Edit profile with validations
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/edit-profile.png)
+
 #### <i>Prerequisites</i>
 
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.

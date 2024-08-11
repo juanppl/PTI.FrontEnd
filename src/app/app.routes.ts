@@ -70,6 +70,11 @@ export const routes: Routes = [
         path: 'products-admin',
         loadComponent: () => import('./views/pages/products-admin/products-admin.component').then((m) => m.ProductsAdminComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./views/pages/profile/profile.component').then((m) => m.ProfileComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },

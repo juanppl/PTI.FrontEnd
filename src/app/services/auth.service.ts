@@ -67,4 +67,17 @@ export class AuthService {
     );
   }
 
+  public updateUserProfile(user: UserProfile): Observable<void> {
+    return this.http.put<void>(`${environment.api}update-profile/${user.id}/`, user).pipe(
+      catchError((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error when updating user info',
+          html: `${err.error.Message} ${err.error.Id}`
+        });
+        return of();
+      })
+    );
+  }
+
 }
