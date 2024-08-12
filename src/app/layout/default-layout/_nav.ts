@@ -8,7 +8,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Productos',
-    url: '/theme/colors',
+    url: '/shop-products',
     iconComponent: { name: 'cil3d' }
   },
   {

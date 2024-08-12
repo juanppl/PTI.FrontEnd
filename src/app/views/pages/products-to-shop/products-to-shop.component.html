@@ -1,0 +1,25 @@
+
+<div class="row">
+    @for (product of products; track $index) {
+        <div class="col-4">
+            <c-card>
+                <img cCardImg="top" src="./assets/images/NO-PIC-PLACEHOLDER.jpg">
+                <c-card-body>
+                    <div class="d-flex justify-content-between">
+                        <h5 cCardTitle>{{product.fullName}}</h5>
+                        <p class="p-0 m-0">{{product.price | currency}}</p>
+                    </div>
+                    <p cCardText>
+                        {{product.description}}
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button cButton color="primary" (click)="addProductToCart(product)"
+                            [disabled]="productExistsOnCart(product)" >
+                                Agregar al carrito!
+                        </button>
+                    </div>
+                </c-card-body>
+            </c-card>
+        </div>
+    }
+</div>

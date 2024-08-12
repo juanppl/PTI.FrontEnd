@@ -29,6 +29,9 @@
 #### Edit profile with validations
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/edit-profile.png)
 
+#### Shopping page for users
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/products-user.png)
+
 #### <i>Prerequisites</i>
 
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.

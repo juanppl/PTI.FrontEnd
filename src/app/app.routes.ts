@@ -75,6 +75,11 @@ export const routes: Routes = [
         path: 'profile',
         loadComponent: () => import('./views/pages/profile/profile.component').then((m) => m.ProfileComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'shop-products',
+        loadComponent: () => import('./views/pages/products-to-shop/products-to-shop.component').then((m) => m.ProductsToShopComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },
