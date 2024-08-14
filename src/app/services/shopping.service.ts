@@ -30,4 +30,8 @@ export class ShoppingService {
     return this.productsFromCart.some(p => p.id == productId);
   }
 
+  public removeAllProductsFromCart(): void {
+    this.productsFromCart = [];
+  }
+
 }

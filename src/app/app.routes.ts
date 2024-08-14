@@ -80,6 +80,11 @@ export const routes: Routes = [
         path: 'shop-products',
         loadComponent: () => import('./views/pages/products-to-shop/products-to-shop.component').then((m) => m.ProductsToShopComponent),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'orders',
+        loadComponent: () => import('./views/pages/orders/orders.component').then((m) => m.OrdersComponent),
+        canActivate: [AuthGuard]
       }
     ]
   },

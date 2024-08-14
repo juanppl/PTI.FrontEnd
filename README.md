@@ -32,6 +32,9 @@
 #### Shopping page for users
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/products-user.png)
 
+#### Orders from users
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/orders.png)
+
 #### <i>Prerequisites</i>
 
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.

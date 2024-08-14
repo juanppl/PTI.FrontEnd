@@ -6,7 +6,9 @@ export interface UserCredentials {
 export interface LoggedInUser {
     id: number,
     token: string,
-    username: string
+    username: string,
+    is_superuser: boolean,
+    user_permissions: []
 }
 
 export interface CreateUser {
