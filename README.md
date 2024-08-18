@@ -35,6 +35,9 @@
 #### Orders from users
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/orders.png)
 
+#### Pay Order from user
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/pay-order.png)
+
 #### <i>Prerequisites</i>
 
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.

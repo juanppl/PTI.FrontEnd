@@ -1,25 +1,41 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Order } from 'src/app/models/Order';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import Swal from 'sweetalert2';
+import { OrderPaymentComponent } from '../order-payment/order-payment.component';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CurrencyPipe, DatePipe],
+  imports: [CurrencyPipe, DatePipe, OrderPaymentComponent],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit, OnDestroy {
   
   public ordersService = inject(OrdersService);
   public authService = inject(AuthService);
   public orders: Order[] = [];
+  public isPayingOrder = false;
+
+  private subscription$: Subscription;
+  private subscriptionTable$: Subscription;
+
+  constructor() {
+    this.subscription$ = this.ordersService.refreshOrdersTable$.subscribe(_ => this.getLoggedUserOrders());
+    this.subscriptionTable$ = this.ordersService.displayOrders$.subscribe(isPaying => this.isPayingOrder = isPaying);
+  }
   
   ngOnInit(): void {
     this.getLoggedUserOrders();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscriptionTable$.unsubscribe();
   }
 
   private getLoggedUserOrders(): void {
@@ -61,6 +77,11 @@ export class OrdersComponent implements OnInit {
           });
         }
       });
+  }
+
+  public sendOrderToBePaid(order: Order): void {
+    this.isPayingOrder = true;
+    this.ordersService.selectedOrder$.next(order);
   }
 
 }

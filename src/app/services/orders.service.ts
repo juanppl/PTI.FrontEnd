@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
+import { catchError, Observable, ReplaySubject, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { environment } from '../../environments/environment';
 import { Order } from '../models/Order';
@@ -9,6 +9,10 @@ import { Order } from '../models/Order';
   providedIn: 'root'
 })
 export class OrdersService {
+
+  public refreshOrdersTable$: Subject<void> = new Subject<void>();
+  public selectedOrder$: ReplaySubject<Order | null> = new ReplaySubject<Order | null>(); 
+  public displayOrders$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +39,21 @@ export class OrdersService {
         Swal.fire({
           icon: 'error',
           title: 'Error when creating Order',
+          html: `${err.error.Message} ${err.error.Id}`
+        });
+        return [];
+      })
+    );
+  }
+
+  public payOrder(orderId: number): Observable<void> {
+    const url = `${environment.api}orders/pay-order/${orderId}/`;
+    return this.http.post<void>(url, orderId)
+    .pipe(
+      catchError(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error when paying Order',
           html: `${err.error.Message} ${err.error.Id}`
         });
         return [];

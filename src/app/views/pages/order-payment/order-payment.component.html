@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-1 d-flex justify-content-center align-items-center">
+        <i class="fa-solid fa-arrow-left cursor-pointer" (click)="cancel()"></i>
+    </div>
+    <div class="col-11">
+        <h4 class="text-center py-3">Order #{{order?.id}}</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-8 col-xs-12">
+        <div class="mx-2 px-2 box" >
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="text-center pt-5">Informacion de pago</h4>
+                </div>
+            </div>
+            <form #f="ngForm" class="form PrintArea pb-5 pt-3" >
+                <div class="row">
+                    <div class="col-12 pb-3 px-4">
+                        <div class="text-left p-0 title2 my-auto pb-2">Nombre completo*</div>
+                        <div class="p-0 w-100">
+                            <input class="w-100 form-control mr-2" type="text" [(ngModel)]="payment.fullName" required
+                                #fullName="ngModel" name="fullName" maxLength="50" autocomplete="off" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': fullName.invalid && (fullName.dirty || fullName.touched)}">
+                                Este campo es requerido
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xs-12 pb-4 px-4">
+                        <div class="text-left p-0 title2 my-auto pb-2">Numero de tarjeta*</div>
+                        <div class="p-0 w-100">
+                            <input class="w-100 form-control mr-2" type="text" mask="0000-0000-0000-0000"
+                                [(ngModel)]="payment.cardNumber" required
+                                #cardNumber="ngModel" name="cardNumber" maxLength="19" autocomplete="off" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': cardNumber.invalid && (cardNumber.dirty || cardNumber.touched)}">
+                                Este campo es requerido
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 col-xs-6 px-4">
+                        <div class="text-left p-0 title2 my-auto pb-2">Fecha de expiracion*</div>
+                        <div class="p-0 w-100">
+                            <input class="w-100 form-control mr-2" type="text" mask="00/00" [showMaskTyped]="true"
+                                [(ngModel)]="payment.cardDate" required
+                                #cardDate="ngModel" name="cardDate" maxLength="8" autocomplete="off" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': cardDate.invalid && (cardDate.dirty || cardDate.touched)}">
+                                Este campo es requerido
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-2 col-xs-6 px-4">
+                        <div class="text-left p-0 title2 my-auto pb-2">CVV*</div>
+                        <div class="p-0 w-100">
+                            <input class="w-100 form-control mr-2" type="text" [(ngModel)]="payment.cvv" required
+                                #cvv="ngModel" name="cvv" maxLength="3" autocomplete="off" />
+                            <p class="invalid-feedback d-block p-0 m-0"
+                                [ngClass]="{'d-block': cvv.invalid && (cvv.dirty || cvv.touched)}">
+                                Este campo es requerido
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 px-4">
+                        <button class="btn btn-primary m-auto w-100 form-btn" [disabled]="!f.valid" type="submit">
+                            Pagar - {{order?.price | currency}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4 col-xs-12">
+        <div class="mx-2 px-2 box">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="text-center pt-5 pb-3">Tu Orden</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @for (product of order?.items; track $index) {
+                        <div class="row p-0 m-0">
+                            <div class="col-12 p-0 m-0 py-2">
+                                <p class="m-0 p-0 px-2 name-text"><b>Nombre:</b> {{getProductProp(product, 'fullName')}}</p>
+                                <p class="m-0 p-0 px-2 name-text"><b>Cantidad:</b> {{product.quantity}}</p>
+                                <p class="m-0 p-0 px-2"><b>Precio:</b> {{getProductProp(product, 'price') | currency}}</p>
+                            </div>
+                        </div>
+                        <hr class="solid p-0 m-0 my-1">
+                    }
+                    <p class="m-0 p-0 px-2 py-4 text-center"><b>Total: {{order?.price | currency}}</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

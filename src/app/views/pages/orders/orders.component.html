@@ -1,52 +1,61 @@
 <div class="container">
-
-    <div class="row">
-        <div class="col-12">
-            <h3>Tus Ordenes</h3>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-striped my-4">
-                <thead>
-                    <tr>
-                        <th scope="col" class="text-center align-middle">Precio</th>
-                        <th scope="col" class="text-center align-middle">Fecha de creacion</th>
-                        <th scope="col" class="text-center align-middle">Estado</th>
-                        <th scope="col" class="text-center align-middle">Cantidad de productos</th>
-                        <th scope="col" class="text-center align-middle">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (orders.length == 0) {
-                        <td colspan="4" class="text-center py-3 fw-bold fs-4">No tienes ninguna orden</td>
-                    }
-            
-                    @if (orders.length > 0) {
-                        @for (order of orders; track $index) {
+    @if (!isPayingOrder) {
+        <div class="container">
+        
+            <div class="row">
+                <div class="col-12">
+                    <h3>Tus Ordenes</h3>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped my-4">
+                        <thead>
                             <tr>
-                                <td class="text-center align-middle">{{ order.price | currency }}</td>
-                                <td class="text-center align-middle">{{ order.creationDate | date:'MM/dd/y'}}</td>
-                                <td class="text-center align-middle">{{ order.status }}</td>
-                                <td class="text-center align-middle">{{ order.items.length }}</td>
-                                <td class="text-center align-middle">
-                                    <div class="d-flex justify-content-center align-items-center gap-1">
-                                        @if (!order.wasCancelled && !order.paidDate) {
-                                            <button type="button" class="btn btn-primary" title="Pay Order"  >
-                                                <i class="fa-solid fa-dollar-sign"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-danger" title="Cancel Order" (click)="cancelOrder(order.id!)" >
-                                                <i class="fa-solid fa-x white"></i>          
-                                            </button>
-                                        }
-                                    </div>
-                                </td>
+                                <th scope="col" class="text-center align-middle">Precio Total</th>
+                                <th scope="col" class="text-center align-middle">Fecha de creacion</th>
+                                <th scope="col" class="text-center align-middle">Estado</th>
+                                <th scope="col" class="text-center align-middle">Cantidad de productos</th>
+                                <th scope="col" class="text-center align-middle">Acciones</th>
                             </tr>
-                        }
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            @if (orders.length == 0) {
+                                <td colspan="4" class="text-center py-3 fw-bold fs-4">No tienes ninguna orden</td>
+                            }
+                    
+                            @if (orders.length > 0) {
+                                @for (order of orders; track $index) {
+                                    <tr>
+                                        <td class="text-center align-middle">{{ order.price | currency }}</td>
+                                        <td class="text-center align-middle">{{ order.creationDate | date:'MM/dd/y'}}</td>
+                                        <td class="text-center align-middle">{{ order.status }}</td>
+                                        <td class="text-center align-middle">{{ order.items.length }}</td>
+                                        <td class="text-center align-middle">
+                                            <div class="d-flex justify-content-center align-items-center gap-1">
+                                                @if (!order.wasCancelled && !order.paidDate) {
+                                                    <button type="button" class="btn btn-primary" title="Pay Order" (click)="sendOrderToBePaid(order)" >
+                                                        <i class="fa-solid fa-dollar-sign"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger" title="Cancel Order" (click)="cancelOrder(order.id!)" >
+                                                        <i class="fa-solid fa-x white"></i>          
+                                                    </button>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
+    }
+    
+    @if (isPayingOrder) {
+        <app-order-payment></app-order-payment>
+    }
+
 </div>

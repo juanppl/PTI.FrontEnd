@@ -15,6 +15,7 @@ import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DatePipe } from '@angular/common';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,7 +35,8 @@ export const appConfig: ApplicationConfig = {
     IconSetService,
     DatePipe,
     provideAnimations(),
-    provideHttpClient(withInterceptorsFromDi()),  
+    provideHttpClient(withInterceptorsFromDi()),
+    provideEnvironmentNgxMask(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
