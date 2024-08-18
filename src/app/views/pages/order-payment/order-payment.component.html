@@ -14,7 +14,7 @@
                     <h4 class="text-center pt-5">Informacion de pago</h4>
                 </div>
             </div>
-            <form #f="ngForm" class="form PrintArea pb-5 pt-3" >
+            <form #f="ngForm" class="form PrintArea pb-5 pt-3" (ngSubmit)="payOrder()" >
                 <div class="row">
                     <div class="col-12 pb-3 px-4">
                         <div class="text-left p-0 title2 my-auto pb-2">Nombre completo*</div>
@@ -63,8 +63,14 @@
                         </div>
                     </div>
                     <div class="col-12 px-4">
-                        <button class="btn btn-primary m-auto w-100 form-btn" [disabled]="!f.valid" type="submit">
-                            Pagar - {{order?.price | currency}}
+                        <button class="btn btn-primary m-auto w-100 form-btn" 
+                            [disabled]="!f.valid" type="submit">
+                            @if (!isBeingPaid) {
+                                <p class="p-0 m-0">Pagar - {{order?.price | currency}}</p>
+                            }
+                            @if (isBeingPaid) {
+                                <app-spinner></app-spinner>
+                            }
                         </button>
                     </div>
                 </div>

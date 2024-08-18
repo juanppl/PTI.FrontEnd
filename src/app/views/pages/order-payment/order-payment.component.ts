@@ -8,11 +8,13 @@ import { Payment } from 'src/app/models/Payment';
 import { NgxMaskDirective } from 'ngx-mask';
 import { Product } from 'src/app/models/Product';
 import { OrderItems } from 'src/app/models/OrderItems';
+import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-payment',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, NgxMaskDirective],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, NgxMaskDirective, SpinnerComponent],
   templateUrl: './order-payment.component.html',
   styleUrl: './order-payment.component.scss'
 })
@@ -23,6 +25,7 @@ export class OrderPaymentComponent implements OnInit, OnDestroy {
   private subscription$: Subscription;
   public order: Order | null = this.initializeOrder();
   public payment: Payment = <Payment>{};
+  public isBeingPaid = false;
   
   constructor() {
     this.subscription$ = this.ordersService.selectedOrder$
@@ -63,6 +66,25 @@ export class OrderPaymentComponent implements OnInit, OnDestroy {
       return item!.product[prop]!.toString();
     }
     return '';
+  }
+
+  public payOrder(): void {
+    this.isBeingPaid = true;
+    setTimeout(() => {
+      this.ordersService.payOrder(this.order!.id!)
+        .subscribe({
+          next: _ => {
+            this.ordersService.displayOrders$.next(false);
+            this.ordersService.refreshOrdersTable$.next();
+            Swal.fire({
+              icon: 'success',
+              title: 'Orden Pagada Exitosamente!',
+              text: 'Se ha pagado la orden de manera exitosa!'
+            });
+            this.isBeingPaid = false;
+          }
+        });
+    }, 2000);
   }
 
 }
