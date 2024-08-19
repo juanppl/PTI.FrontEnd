@@ -25,6 +25,7 @@ export class AuthService {
 
   public logout(): void {
     localStorage.removeItem('userData');
+    sessionStorage.removeItem('cartProducts');
   }
 
   public logIn(username: string, password: string): Observable<LoggedInUser | null> {

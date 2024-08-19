@@ -9,29 +9,35 @@ export class ShoppingService {
 
   public refreshProductsFromCart$: Subject<void> = new Subject<void>();
 
-  private productsFromCart: Product[] = [];
+  // private productsFromCart: Product[] = [];
 
   constructor() { }
 
   public getProductsInCart(): Product[] {
-    return this.productsFromCart;
+    const productsCart  = sessionStorage.getItem('cartProducts');
+    return productsCart ? JSON.parse( productsCart) : [];
   }
 
   public addProductToCart(product: Product): void {
-    this.productsFromCart.push(product);
+    const productsFromCart = this.getProductsInCart();
+    productsFromCart.push(product);
+    sessionStorage.setItem('cartProducts', JSON.stringify(productsFromCart));
   }
 
   public removeProductFromCart(productId: number): void {
-    const foundProductIdx = this.productsFromCart.findIndex(p => p.id == productId);
-    this.productsFromCart.splice(foundProductIdx, 1);
+    const productsFromCart = this.getProductsInCart();
+    const foundProductIdx = productsFromCart.findIndex(p => p.id == productId);
+    productsFromCart.splice(foundProductIdx, 1);
+    sessionStorage.setItem('cartProducts', JSON.stringify(productsFromCart));
   }
 
   public doesProductExistsOnCart(productId: number): boolean {
-    return this.productsFromCart.some(p => p.id == productId);
+    const productsFromCart = this.getProductsInCart();
+    return productsFromCart.some(p => p.id == productId);
   }
 
   public removeAllProductsFromCart(): void {
-    this.productsFromCart = [];
+    sessionStorage.removeItem('cartProducts');
   }
 
 }
