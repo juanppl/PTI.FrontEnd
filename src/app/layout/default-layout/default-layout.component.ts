@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
@@ -16,7 +16,8 @@ import {
 } from '@coreui/angular';
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
-import { navItems } from './_nav';
+import { navItems, getNavItems } from './_nav';
+import { AuthService } from 'src/app/services/auth.service';
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -50,6 +51,8 @@ function isOverflown(element: HTMLElement) {
 })
 export class DefaultLayoutComponent {
   public navItems = navItems;
+  public getNavItems = getNavItems;
+  public authService = inject(AuthService);
 
   onScrollbarUpdate($event: any) {
     // if ($event.verticalUsed) {
