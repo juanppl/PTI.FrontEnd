@@ -1,0 +1,36 @@
+<div class="btn-flotante" >
+    <a
+        (click)="toogleChat()"
+    >
+        <img 
+            class="chatGpt"
+            src="assets/images/ChatGPT.svg"
+            [ngClass]="{'show-icon': !displayChat, 'hide-icon': displayChat}"
+        />
+        <i class="fa-solid fa-xmark" [ngClass]="{'show-icon-x': displayChat, 'hide-icon-x': !displayChat}"></i>
+    </a>
+</div>
+
+<div class="chat-container" [ngClass]="{'show-chat': displayChat, 'hide-chat':!displayChat}">
+    <div class="messages" #messagesContainer>
+
+        <div *ngFor="let message of messages"
+            [ngClass]="{ 'user-message-container': message.user, 'bot-message-container': !message.user }">
+            
+            <div [ngClass]="{ 'user-message-text': message.user, 'bot-message-text': !message.user }">
+                {{ message.text }}
+            </div>
+        </div>
+
+        <div class="bot-message-container">
+            <div class="message bot-message-text" *ngIf="errorOccurred">
+                {{ customErrorMessage }}
+            </div>
+        </div>
+    </div>
+
+    <div class="input-container gradient-border">
+        <textarea class="gradient-border" rows="1" [(ngModel)]="userInput" (keyup.enter)="sendMessage()" (input)="autoGrow($event)" placeholder="Escribe un mensaje..."></textarea>
+        <button (click)="sendMessage()"><i class="bx bx-up-arrow-alt"></i></button>
+    </div>
+</div>

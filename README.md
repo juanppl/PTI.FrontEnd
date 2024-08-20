@@ -38,6 +38,12 @@
 #### Pay Order from user
 ![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/pay-order.png)
 
+#### Chatbot Closed
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/chat-closed.png)
+
+#### Chatbot open
+![Inventory table](https://github.com/juanppl/PTI.FrontEnd/blob/master/src/assets/chat-opened.png)
+
 #### <i>Prerequisites</i>
 
 Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.

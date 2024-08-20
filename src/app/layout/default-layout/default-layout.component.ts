@@ -18,6 +18,7 @@ import {
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems, getNavItems } from './_nav';
 import { AuthService } from 'src/app/services/auth.service';
+import { ChatbotComponent } from '../../components/chatbot/chatbot.component';
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -46,7 +47,8 @@ function isOverflown(element: HTMLElement) {
     ShadowOnScrollDirective,
     ContainerComponent,
     RouterOutlet,
-    DefaultFooterComponent
+    DefaultFooterComponent,
+    ChatbotComponent
   ]
 })
 export class DefaultLayoutComponent {
