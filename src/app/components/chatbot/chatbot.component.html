@@ -31,6 +31,9 @@
 
     <div class="input-container gradient-border">
         <textarea class="gradient-border" rows="1" [(ngModel)]="userInput" (keyup.enter)="sendMessage()" (input)="autoGrow($event)" placeholder="Escribe un mensaje..."></textarea>
-        <button (click)="sendMessage()"><i class="bx bx-up-arrow-alt"></i></button>
+        <button (click)="sendMessage()" [disabled]="isLoading">
+            <i class="bx bx-up-arrow-alt" *ngIf="!isLoading"></i>
+            <app-spinner *ngIf="isLoading" class="spinner"></app-spinner>
+        </button>
     </div>
 </div>

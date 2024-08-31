@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { InterceptorSkipHeader } from '../interceptors/auth.interceptor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatbotService {
 
-  private apiUrl = 'https://api.openai.com/v1/chat/completions';
 
   constructor(private http: HttpClient) { }
 
+  public createChatSession(): Observable<CreatedThread> {
+    const url = `${environment.api}chatbot/create-thread/`;
+    return this.http.post<CreatedThread>(url, {});
+  }
+
   public sendMessageToChatbot(message: string): Observable<ApiResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${environment.chatGptKey}`,
-    }).set(InterceptorSkipHeader, '');;
-
-    const body = {
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
-    };
-
-    return this.http.post<ApiResponse>(this.apiUrl, body, {headers});
+    const url = `${environment.api}chatbot/send-message-to-thread/`;
+    const thread_id = localStorage.getItem('chat-thread');
+    return this.http.post<ApiResponse>(url, { message, thread_id });
   }
 
 }
@@ -35,6 +30,11 @@ export interface ApiResponse {
   created: string;
   model: string;
   choices: Array<Choices>;
+  response: ChatResponse;
+}
+
+export interface ChatResponse {
+  message: string;
 }
 
 export interface Choices {
@@ -52,3 +52,6 @@ export interface ChatMessage {
   user: boolean;
 }
 
+export interface CreatedThread {
+  thread_id: string;
+}

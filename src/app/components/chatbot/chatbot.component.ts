@@ -3,11 +3,12 @@ import { ChatbotService, ChatMessage } from '../../services/chatbot.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-chatbot',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SpinnerComponent],
   templateUrl: './chatbot.component.html',
   styleUrl: './chatbot.component.scss'
 })
@@ -16,7 +17,7 @@ export class ChatbotComponent {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   messages: ChatMessage[] = [];
   userInput: string = '';
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   errorOccurred: boolean = false;
   formattedResponse: SafeHtml = '';
   customErrorMessage: string | null = null;
@@ -26,10 +27,23 @@ export class ChatbotComponent {
   private chatService = inject(ChatbotService);
   public displayChat: boolean = false;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {
+    this.createChatSession();
+  }
 
   ngOnInit() {
     this.messages.push({ text: "Bienvenido, como te puedo ayudar el dia de hoy?", user: false });
+  }
+
+  private createChatSession(): void {
+    this.chatService.createChatSession()
+      .subscribe({
+        next: (response) => {
+          if (response.thread_id) {
+            localStorage.setItem('chat-thread', response.thread_id);
+          }
+        }
+      });
   }
 
   ngAfterViewChecked() {
@@ -61,9 +75,8 @@ export class ChatbotComponent {
     this.chatService.sendMessageToChatbot(userMessage)
       .subscribe({
         next: (apiResponse) => {
-          const botResponse = apiResponse.choices[0].message.content.trim();
-          this.messages.push({ text: botResponse, user: false });
-          this.formattedResponse = this.formatCodeBlock(botResponse);
+          // const botResponse = apiResponse.choices[0].message.content.trim();
+          this.messages.push({ text: apiResponse.response.message, user: false });
           this.userInput = '';
           this.isLoading = false;
         },

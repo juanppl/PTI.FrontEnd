@@ -264,3 +264,13 @@ $base-font-size: 16px;
     color: #000;
     text-align: center;
 }
+
+.spinner {
+    color: #4646f7;
+    display: block;
+}
+
+:host ::ng-deep .spinner-border {
+    width: 24px;
+    height: 24px;
+}
